@@ -1,4 +1,6 @@
+from bs4 import BeautifulSoup
 def assemble_segments(text_fragments): 
+    print(text_fragments)
     # Step 1: Skip any fragment of size less than 8 
     filtered_fragments = [frag for frag in text_fragments if len(frag) >= 8] 
     segments = [] 
@@ -29,3 +31,11 @@ def assemble_segments(text_fragments):
         current_segment = "" 
     
     return segments
+
+
+# Example usage
+html = "<html><body><p>Here is some text.</p><p>Here is some more text.</p></body></html>"
+soup = BeautifulSoup(html, "html.parser")
+text_fragments = [tag.get_text() for tag in soup.find_all(text=True)]
+segments = assemble_segments(text_fragments)
+
